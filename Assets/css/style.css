@@ -1,62 +1,154 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;700&display=swap');
+
+:root {
+	--lght-clr: white;
+	--drk-clr: rgb(29, 29, 29);
+	--blue-clr: rgb(31, 109, 255);
+}
+
+* {
+	padding: 0;
+	margin: 0;
+	box-sizing: border-box;
+}
+
 body {
-	font-family: 'Open Sans', sans-serif;
+	font-family: 'Montserrat', sans-serif;
+	background-color: rgb(46, 46, 46);
 	font-size: 16px;
 	line-height: 1;
 }
 
+main {
+	width: 100%;
+	display: flex;
+	justify-content: center;
+}
+
+h1 {
+	font-weight: bolder;
+}
+
+.display-3 {
+	font-size: 3rem;
+}
+
 textarea {
-	background: transparent;
 	border: none;
 	resize: none;
-	color: #000000;
-	border-left: 1px solid black;
-	padding: 10px;
+	outline: none;
 }
 
 .jumbotron {
 	text-align: center;
 	background-color: transparent;
-	color: black;
+	color: rgb(255, 255, 255);
 	border-radius: 0;
-	border-bottom: 10px solid black;
+	border-bottom: 2px solid rgb(255, 255, 255);
+	padding: 2rem;
 }
 
+.container {
+	display: flex;
+	flex-direction: column;
+	margin: 1.5rem 0;
+	padding: 0;
+}
+
+.block {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	list-style: none;
+	height: 100px;
+	width: 100%;
+	border: 1px solid rgb(155, 155, 155);
+	box-shadow: 0 2px 8px rgb(0, 0, 0);
+	padding: 0.5rem;
+	margin-bottom: 1rem;
+	text-align: center;
+}
+
+.blockTime {
+	color: var(--blue-clr);
+	width: 15vw;
+	padding: 0.6rem 0;
+	height: 50%;
+}
+
+.blockText {
+	width: 65vw;
+	padding: 1rem;
+	height: 100%;
+	border-radius: 10px 0 0 10px;
+}
+
+.blockSave {
+	outline: none;
+	color: white;
+	background-color: var(--blue-clr);
+	border: 1px solid white;
+	border-radius: 0 10px 10px 0;
+	width: 15vw;
+	height: 100%;
+}
+.blockSave:focus {
+	outline: none;
+}
+.blockSave:hover {
+	background-color: rgb(27, 164, 255);
+	outline: none;
+}
+/* the clear button  */
+
+.btn-container {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	padding: 3rem 0 5.5rem 0;
+}
+
+#clearBtn {
+	padding: 1rem;
+	color: white;
+	background: rgb(255, 110, 110);
+	border: 1px solid white;
+	border-radius: 10px;
+}
+#clearBtn:hover {
+	background-color: rgb(255, 42, 42);
+}
+
+/* 
 .description {
 	white-space: pre-wrap;
 }
-
 .time-block {
 	text-align: center;
 	border-radius: 15px;
 }
-
 .row {
 	white-space: pre-wrap;
 	height: 80px;
 	border-top: 1px solid white;
 }
-
 .hour {
 	background-color: #ffffff;
 	color: #000000;
 	border-top: 1px dashed #000000;
 }
-
 .past {
 	background-color: #d3d3d3;
 	color: white;
 }
-
 .present {
 	background-color: #ff6961;
 	color: white;
 }
-
 .future {
 	background-color: #77dd77;
 	color: white;
 }
-
 .saveBtn {
 	border-left: 1px solid black;
 	border-top-right-radius: 15px;
@@ -64,8 +156,7 @@ textarea {
 	background-color: #06aed5;
 	color: white;
 }
-
 .saveBtn i:hover {
 	font-size: 20px;
 	transition: all 0.3s ease-in-out;
-}
+} */
