@@ -59,10 +59,28 @@ function displayHours() {
       let parent = $(element).parent().get()
       let time = $(parent).children('.blockTime').text()
       let msg = $(parent).children('.blockText').val()
-
+      // let areaBlock = $(element).parent().children('.blockText');
+      // areaBlock.attr('class', 'saved');
+      // areaBlock.delay('1000').removeClass('saved')
       saveBlocks(time, msg);
     })
+
+    // check for enter button
+    // console.log($(element).parent().children('.blockText'))
+    
+    $(element).parent().children('.blockText').keypress((event) => {
+      if (event.which === 13) {
+        event.preventDefault()
+        let parent = $(element).parent().get()
+        let time = $(parent).children('.blockTime').text()
+        let msg = $(parent).children('.blockText').val()
+      
+        saveBlocks(time, msg);
+      }
+    })
+
   }))
+
   let momentHour = moment().format('H');
   colorCoordinate(momentHour)
 }
@@ -77,28 +95,17 @@ function colorCoordinate(momentHour) {
   for (i = 0; i < blocksNum; i++) {
     $(blocks[i]).attr('data-time', num[i])
   }
-
-
-  // for (i = 0; i < blocksNum; i++) {
-  //   let blockData = $(blocks[i]).data().time;
-  //   if (blockData < momentHour) {
-  //     $(blocks[i]).css("background-color", "var(--grey-clr)")
-  //   } else if (blockData = momentHour) {
-  //     $(blocks[i]).css("background-color", "var(--present-clr)")
-  //   } else {
-  //     $(blocks[i]).css("background-color", "var(---clr)")
-  //   }
-  
+  // checks time to add color code background 
   for (i = 0; i < blocksNum; i++) {
     let blockData = $(blocks[i]).data().time;
     if (blockData == momentHour) {
-      console.log('present time')
+      // console.log('present time')
       $(blocks[i]).css("background-color", "var(--present-clr)")
     } else if (blockData > momentHour) {
-      console.log('waiting for the future')
+      // console.log('waiting for the future')
       $(blocks[i]).css("background-color", "var(--future-clr)")
     } else {
-      console.log('this the past')
+      // console.log('this the past')
       $(blocks[i]).css("background-color", "var(--grey-clr)")
     }
   }
