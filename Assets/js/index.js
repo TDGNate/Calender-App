@@ -3,6 +3,9 @@ let dayEl = $('#currentDay')
 let container = $('.container')
 let clear = $('#clearBtn')
 
+let today = moment().format("dddd,[ ]MMMM Do");
+$(dayEl).text(today)
+
 let hours = {
   "9:00 AM": "",
   "10:00 AM": "",
@@ -25,7 +28,6 @@ function retrieveHoursObj() {
     hours = pullHours
   }
 }
-
 retrieveHoursObj()
 
 // localStorage.clear()
@@ -61,9 +63,46 @@ function displayHours() {
       saveBlocks(time, msg);
     })
   }))
+  let momentHour = moment().format('H');
+  colorCoordinate(momentHour)
 }
 
 displayHours()
+
+function colorCoordinate(momentHour) {
+  let blocks = $('.block')
+  let blocksNum = $('.block').length;
+  let num = [9, 10, 11, 12, 13, 14, 15, 16, 17, 18]
+  // console.log(blocks.length)
+  for (i = 0; i < blocksNum; i++) {
+    $(blocks[i]).attr('data-time', num[i])
+  }
+
+
+  // for (i = 0; i < blocksNum; i++) {
+  //   let blockData = $(blocks[i]).data().time;
+  //   if (blockData < momentHour) {
+  //     $(blocks[i]).css("background-color", "var(--grey-clr)")
+  //   } else if (blockData = momentHour) {
+  //     $(blocks[i]).css("background-color", "var(--present-clr)")
+  //   } else {
+  //     $(blocks[i]).css("background-color", "var(---clr)")
+  //   }
+  
+  for (i = 0; i < blocksNum; i++) {
+    let blockData = $(blocks[i]).data().time;
+    if (blockData == momentHour) {
+      console.log('present time')
+      $(blocks[i]).css("background-color", "var(--present-clr)")
+    } else if (blockData > momentHour) {
+      console.log('waiting for the future')
+      $(blocks[i]).css("background-color", "var(--future-clr)")
+    } else {
+      console.log('this the past')
+      $(blocks[i]).css("background-color", "var(--grey-clr)")
+    }
+  }
+}
 
 // Function to save the time and the message in localstorage 
 

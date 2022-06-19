@@ -4,6 +4,10 @@
 	--lght-clr: white;
 	--drk-clr: rgb(29, 29, 29);
 	--blue-clr: rgb(31, 109, 255);
+
+	--grey-clr: rgb(46, 46, 46);
+	--present-clr: rgba(53, 201, 255, 0.173);
+	--future-clr: rgba(84, 255, 98, 0.12);
 }
 
 * {
@@ -56,6 +60,8 @@ textarea {
 }
 
 .block {
+	background-color: var(--grey-clr);
+	border-radius: 4px;
 	display: flex;
 	flex-direction: row;
 	align-items: center;
