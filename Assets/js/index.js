@@ -124,10 +124,13 @@ function saveBlocks(time, msg) {
   localStorage.setItem('hours', JSON.stringify(hours))
 }
 
-// when clear button is clicked, clear localstorage and reload page to update 
-clear.on('click', () => {
+// when clear button is clicked, it calls the clearblocks function 
+clear.on('click', clearBlocks)
+
+// function to clear localstorage and reload page to update
+function clearBlocks() {
   localStorage.clear()
   setTimeout(() => {
     location.reload()
   }, 300)
-})
+}
