@@ -2,10 +2,10 @@
 let dayEl = $('#currentDay')
 let container = $('.container')
 let clear = $('#clearBtn')
-
 let today = moment().format("dddd,[ ]MMMM Do");
 $(dayEl).text(today)
 
+// hours object to store time and messages 
 let hours = {
   "9:00 AM": "",
   "10:00 AM": "",
@@ -30,8 +30,6 @@ function retrieveHoursObj() {
 }
 retrieveHoursObj()
 
-// localStorage.clear()
-
 function displayHours() {
   for (let hour in hours) {
     // Creating DOM Elements 
@@ -53,45 +51,53 @@ function displayHours() {
     li.append(button)
     container.append(li)
   }
+
   // Takes the array of blocks made and adds event listeners to get value
   ($('.blockSave').get().forEach(element => {
     $(element).on('click', () => {
       let parent = $(element).parent().get()
       let time = $(parent).children('.blockTime').text()
       let msg = $(parent).children('.blockText').val()
-      // let areaBlock = $(element).parent().children('.blockText');
-      // areaBlock.attr('class', 'saved');
-      // areaBlock.delay('1000').removeClass('saved')
+      let textBg = $(parent).children('.blockText')
+      // changes background on textarea to show that it has been saved 
+      textBg.css('background', 'rgb(223, 255, 223)')
+      setTimeout(() => {
+        textBg.css('background', '#fff')
+      }, 650)
+      // send message and time to function to store in localstorage 
       saveBlocks(time, msg);
     })
 
     // check for enter button
-    // console.log($(element).parent().children('.blockText'))
-    
     $(element).parent().children('.blockText').keypress((event) => {
       if (event.which === 13) {
         event.preventDefault()
         let parent = $(element).parent().get()
         let time = $(parent).children('.blockTime').text()
         let msg = $(parent).children('.blockText').val()
-      
+        let textBg = $(parent).children('.blockText')
+        // changes background on textarea to show that it has been saved 
+        textBg.css('background', 'rgb(223, 255, 223)')
+        setTimeout(() => {
+          textBg.css('background', '#fff')
+        }, 650)
+        // send message and time to function to store in localstorage 
         saveBlocks(time, msg);
       }
     })
 
   }))
-
+  // getting the current hour of the day to pass in a function
   let momentHour = moment().format('H');
   colorCoordinate(momentHour)
 }
-
 displayHours()
 
+// function to change color of background depending on time of day 
 function colorCoordinate(momentHour) {
   let blocks = $('.block')
   let blocksNum = $('.block').length;
   let num = [9, 10, 11, 12, 13, 14, 15, 16, 17, 18]
-  // console.log(blocks.length)
   for (i = 0; i < blocksNum; i++) {
     $(blocks[i]).attr('data-time', num[i])
   }
@@ -99,20 +105,16 @@ function colorCoordinate(momentHour) {
   for (i = 0; i < blocksNum; i++) {
     let blockData = $(blocks[i]).data().time;
     if (blockData == momentHour) {
-      // console.log('present time')
       $(blocks[i]).css("background-color", "var(--present-clr)")
     } else if (blockData > momentHour) {
-      // console.log('waiting for the future')
       $(blocks[i]).css("background-color", "var(--future-clr)")
     } else {
-      // console.log('this the past')
       $(blocks[i]).css("background-color", "var(--grey-clr)")
     }
   }
 }
 
 // Function to save the time and the message in localstorage 
-
 function saveBlocks(time, msg) {
   for (let hour in hours) {
     if (hour === time) {
@@ -122,10 +124,10 @@ function saveBlocks(time, msg) {
   localStorage.setItem('hours', JSON.stringify(hours))
 }
 
+// when clear button is clicked, clear localstorage and reload page to update 
 clear.on('click', () => {
   localStorage.clear()
   setTimeout(() => {
     location.reload()
   }, 300)
 })
-
